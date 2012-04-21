@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Node-Link Tree</title>
-    <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/d3/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/d3/lib/jquery-ui/jquery-ui.min.js"></script>
     <style type="text/css">
 
 circle.node {
@@ -55,7 +55,7 @@ path.link {
             // Compute the new tree layout.
             var nodes = tree.nodes(root).reverse();
 
-            // Update the nodes…
+            // Update the nodesï¿½
             var node = vis.selectAll("circle.node")
       .data(nodes, function (d) { return d.id || (d.id = ++i); });
 
@@ -86,7 +86,7 @@ path.link {
       .attr("cy", function (d) { return source.x; })
       .remove();
 
-            // Update the links…
+            // Update the linksï¿½
             var link = vis.selectAll("path.link")
       .data(tree.links(nodes), function (d) { return d.target.id; });
 
