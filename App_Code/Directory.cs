@@ -64,16 +64,14 @@ public class Directory : System.Web.Services.WebService
       
          */
         DirectoryInfo rootDir = new DirectoryInfo("C:\\dell");
-        NodeObject rootNode = new NodeObject();
-        rootNode.name = rootDir.Name;
-        int pass = 0;
         NodeObject currentNode = new NodeObject();
-        currentNode = null;
-        WalkDirectoryTree(rootDir, ref rootNode,  currentNode, pass);
+        currentNode.name = rootDir.Name;
+        currentNode.children = new List<NodeObject>();
+        currentNode.children.Add(WalkDirectoryTree(rootDir, currentNode));
 
 
 
-        return jsonSerialize(rootNode);
+        return jsonSerialize(currentNode);
     }
 
     #region Private Methods
@@ -85,16 +83,11 @@ public class Directory : System.Web.Services.WebService
         return js.Serialize(o);
     }
 
-    private void WalkDirectoryTree(DirectoryInfo root, ref NodeObject rootNode,  NodeObject currentNode, int pass)
+    private NodeObject WalkDirectoryTree(DirectoryInfo root, NodeObject currentNode)
     {
-        if (pass ==0)
-        {
-            rootNode.children = new List<NodeObject>();
-        }
-        else
-        {
-            currentNode.children = new List<NodeObject>();
-        }
+
+        currentNode.children = new List<NodeObject>();
+
         FileInfo[] files = null;
         DirectoryInfo[] subDirs = null;
         // First, process all the files directly under this folder
@@ -125,14 +118,9 @@ public class Directory : System.Web.Services.WebService
                 // Console.WriteLine(fi.Name);
                 NodeObject obj = new NodeObject();
                 obj.name = fi.Name;
-                if (pass==0)
-                {
-                    rootNode.children.Add(obj);
-                }
-                else
-                {
-                    currentNode.children.Add(obj);
-                }
+
+                currentNode.children.Add(obj);
+
 
             }
 
@@ -145,22 +133,15 @@ public class Directory : System.Web.Services.WebService
                 // Console.WriteLine("{0}", dirInfo.Name);
                 NodeObject obj = new NodeObject();
                 obj.name = dirInfo.Name;
-                if (pass==0)
-                {
-                    rootNode.children.Add(obj);
-                    currentNode = new NodeObject();
-                    currentNode.name = obj.name;
-                }
-                else
-                {
-                    currentNode.children.Add(obj);
-                }
-                pass++;
-                WalkDirectoryTree(dirInfo, ref rootNode, currentNode, pass);
-                pass--;
+                obj.children = new List<NodeObject>();
+                //currentNode.children.Add(obj);
+                currentNode.children.Add(WalkDirectoryTree(dirInfo, obj));
+                //WalkDirectoryTree(dirInfo, obj);
+
             }
 
         }
+        return currentNode;
     }
 
     #endregion
