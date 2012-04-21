@@ -31,8 +31,8 @@
         })(window);
     </script>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<%= Page.ResolveUrl("~/d3/lib/jquery/jquery.min.js") %>"></script>
+    <script type="text/javascript" src="<%= Page.ResolveUrl("~/d3/lib/jquery-ui/jquery-ui.min.js") %>"></script>
     <script type="text/javascript" src='<%= Page.ResolveUrl("~/d3/d3.v2.js") %>'></script>
     <script type="text/javascript" src='<%= Page.ResolveUrl("~/js/plugins.js") %>'></script>
     <script type="text/javascript" src='<%= Page.ResolveUrl("~/js/app_utils.js") %>'></script>
