@@ -2,14 +2,15 @@
 (function ($) {
     $.extend(App, {
 
-        GetData: function (dir) {
+        GetData: function (dir, callback) {
             if (typeof (dir) === 'undefined') {
                 dir = App.AppPath;
             }
 
-            var dataOut = {
-                "dir": dir
-            };
+            var returnData = 'no data',
+                dataOut = {
+                    "dir": dir
+                };
 
             dataOut = $.toJSON({ data: dataOut });
 
@@ -24,6 +25,8 @@
                 var thisData = $.parseJSON(data.d);
                 $.log("thisData");
                 $.log(thisData);
+
+                callback(thisData);
             });
         }
     });

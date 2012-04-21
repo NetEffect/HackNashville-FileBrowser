@@ -3,7 +3,7 @@
         END_POINT = App.AppPath + '/d3/examples/data/flare.json';
 
     //sample call web service
-    App.GetData();
+    //App.GetData();
 
     var margin = {
         top: 20,
@@ -26,7 +26,29 @@
 
     var vis = d3.select(CHART_SELECTOR).append("svg").attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    /*
     d3.json(END_POINT, function (json) {
+    root = json;
+    root.x0 = height / 2;
+    root.y0 = 0;
+
+    function collapse(d) {
+    if (d.children) {
+    d._children = d.children;
+    d._children.forEach(collapse);
+    d.children = null;
+    }
+    }
+
+    root.children.forEach(collapse);
+    update(root);
+    });
+    */
+
+
+    App.GetData('/', InitChart);
+
+    function InitChart(json) {
         root = json;
         root.x0 = height / 2;
         root.y0 = 0;
@@ -41,7 +63,8 @@
 
         root.children.forEach(collapse);
         update(root);
-    });
+    }
+
 
     function update(source) {
 
