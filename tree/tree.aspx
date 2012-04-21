@@ -41,19 +41,24 @@ path.link {
     <script type="text/javascript">
 
         //call webservice method
-        var call_ws = function () {
+        var call_ws = function (dir) {
+            if (typeof (dir) === 'undefined') {
+                dir = "/";
+            }
 
-            var dataOut = {};
+            var dataOut = {
+                "dir": dir
+            };
 
             var $ = jQuery;
             dataOut = $.toJSON({ data: dataOut });
 
             //call web service
             var request = $.ajax({
-                url: '<%= Page.ResolveUrl("~/Directory.asmx/HelloWorld") %>',
+                url: '<%= Page.ResolveUrl("~/Directory.asmx/GetDir") %>',
                 contentType: "application/json; charset=utf-8",
                 type: "POST",
-                //data: dataOut,
+                data: dataOut,
                 dataType: "json",
                 success: function (data) {
 
