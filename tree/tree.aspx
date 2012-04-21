@@ -12,7 +12,7 @@ currentDir
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Node-Link Tree</title>
-    <script type="text/javascript" src="/d3/d3.v2.js"></script>
+    <script type="text/javascript" src='<%= Page.ResolveUrl("~/d3/d3.v2.js") %>'></script>
     <style type="text/css">
 
 .node circle {
@@ -57,7 +57,7 @@ path.link {
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        d3.json("/d3/examples/data/flare.json", function (json) {
+        d3.json('<%= Page.ResolveUrl("~/d3/examples/data/flare.json") %>', function (json) {
             root = json;
             root.x0 = height / 2;
             root.y0 = 0;
