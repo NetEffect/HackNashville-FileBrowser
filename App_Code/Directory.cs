@@ -63,7 +63,7 @@ public class Directory : System.Web.Services.WebService
 }
       
          */
-        DirectoryInfo rootDir = new DirectoryInfo("C:\\dell");
+        DirectoryInfo rootDir = new DirectoryInfo("C:\\users\\jamyers\\Documents\\Visual Studio 2010\\Projects");
         NodeObject currentNode = new NodeObject();
         currentNode.name = rootDir.Name;
         currentNode.children = new List<NodeObject>();
@@ -111,11 +111,6 @@ public class Directory : System.Web.Services.WebService
         {
             foreach (System.IO.FileInfo fi in files)
             {
-                // In this example, we only access the existing FileInfo object. If we
-                // want to open, delete or modify the file, then
-                // a try-catch block is required here to handle the case
-                // where the file has been deleted since the call to TraverseTree().
-                // Console.WriteLine(fi.Name);
                 NodeObject obj = new NodeObject();
                 obj.name = fi.Name;
 
